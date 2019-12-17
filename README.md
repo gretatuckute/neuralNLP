@@ -19,19 +19,21 @@
 ### Evaluation of ETM 
 
 ### Brain-score: Model implementations
+<p> Implementation of ETM in the brain-score framework and debugging. Possible to test ETM using different model parameters and outputs.
 
 ### Brain-score: ECoG integration
+<p> Packaging of ECoG data for integration into the brain-score framework. Possible to run various language models on the ECoG data.
 
 ### MTurk: Javascript experimental code and analysis
 <p>Code based on "minimal architecture for the generation of portable interactive experiments" script (_magpie); thanks to Polina Tsvilodub for providing code
 <p>Linear regression analysis
 
 ### Analysis: Similarity between obtained embedding spaces
-
-### Analysis: 
+<p> Matching of the GloVe and 20ng vocabulary spaces.
+<p> Pearson/Procrustes analyses between GloVe word embeddings and concurrently trained word embeddings from ETM (rho, embeddings in the word/topic space). 
 
 ### Analysis: Generating plots
-
+:)
 
 # TODO: Code/analyses to be implemented
 <p> Solve dimensionality error to be able to map extracted vectors from rho-matrix onto neural data
