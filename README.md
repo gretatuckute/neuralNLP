@@ -1,6 +1,6 @@
 # neuralNLP
 <p>Code for integrating a generative topic model (embedded topic model, ETM) and ECoG data in mschrimpf's neural-nlp toolbox
-Code for running an *word intruder* MTurk study
+<p>Code for running an *word intruder* MTurk study
 
 # Description of available scripts
 
