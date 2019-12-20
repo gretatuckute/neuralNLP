@@ -1,0 +1,1038 @@
+
+
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* out.txt
+Training an Embedded Topic Model on 20NG with the following settings: Namespace(anneal_lr=0, batch_size=1000, bow_norm=1, clip=0.0, data_path='data/20ng_df_2', dataset='20ng', emb_path='/om/user/ckauf/ETM-master/glove.42B.300d.txt', emb_size=300, embeddings_dim=torch.Size([52258, 300]), enc_drop=0.0, epochs=10, eval_batch_size=1000, load_from='', log_interval=2, lr=0.002, lr_factor=4.0, mode='train', nonmono=10, num_docs_test=7532, num_docs_test_1=7532, num_docs_test_2=7532, num_docs_train=11214, num_docs_valid=100, num_topics=40, num_words=10, optimizer='adam', rho_size=300, save_path='./results_df_2', seed=2019, t_hidden_size=800, tc=0, td=0, theta_act='relu', train_embeddings=0, visualize_every=10, vocab_size=52258, wdecay=1.2e-06)
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+model: ETM(
+  (t_drop): Dropout(p=0.0, inplace=False)
+  (theta_act): ReLU()
+  (alphas): Linear(in_features=300, out_features=40, bias=False)
+  (q_theta): Sequential(
+    (0): Linear(in_features=52258, out_features=800, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=800, out_features=800, bias=True)
+    (3): ReLU()
+  )
+  (mu_q_theta): Linear(in_features=800, out_features=40, bias=True)
+  (logsigma_q_theta): Linear(in_features=800, out_features=40, bias=True)
+)
+
+
+Visualizing model quality before training...
+####################################################################################################
+Visualize topics...
+Topic 0: ['drozinst', 'pmartz', 'jartsu', 'bokarev', 'uudecoded', 'mamishev', 'budlanski', 'supposedconcern', 'hjy']
+Topic 1: ['iskenderov', 'vukela', 'kendigism', 'amydlak', 'dnewman', 'xtshellstrings', 'studyware', 'tsamuel', 'arizvms']
+Topic 2: ['lhzd', 'microbrian', 'watcgl', 'fculpepp', 'xtwindow', 'duvdevan', 'uafhp', 'fraternatae', 'davewood']
+Topic 3: ['aftersleep', 'taylordf', 'wwarf', 'xpermits', 'uknet', 'tkelso', 'rfdz', 'zisfein', 'handrolling']
+Topic 4: ['ttesta', 'ibdk', 'gassanov', 'ksyucg', 'salesdroids', 'chinalake', 'arpci', 'goykhman', 'labelfontlist']
+Topic 5: ['intuitivness', 'apeldoornseweg', 'ednclark', 'devvax', 'kagalenko', 'zilfi', 'concurance', 'etorrem', 'anecedotal']
+Topic 6: ['homxb', 'bbbllluueeee', 'prasadr', 'sargisian', 'borshevshky', 'unnesessary', 'jgnassi', 'thester', 'vipunen']
+Topic 7: ['umassd', 'chenlin', 'menupopup', 'jlroffma', 'bnrgate', 'mjuric', 'jazz', 'mqq', 'auvm']
+Topic 8: ['qrpl', 'mamacass', 'jabido', 'seachg', 'glxwinset', 'arglebargle', 'bhks', 'muteferrik', 'jessea']
+Topic 9: ['positrac', 'ccrtkba', 'xtcallconverter', 'crankcase', 'apoylis', 'zilfi', 'schnopia', 'ajackson', 'setver']
+Topic 10: ['iwii', 'rchzrlk', 'frashokereti', 'muharar', 'deltuvia', 'recondense', 'rknight', 'cusations', 'suprmeme']
+Topic 11: ['xtfree', 'tridom', 'exuptr', 'univesa', 'harbinde', 'murashie', 'sovergnty', 'xdivision', 'awdprime']
+Topic 12: ['kirchoefer', 'dkgi', 'raporu', 'iastate', 'unisql', 'sgoldste', 'xuuencode', 'karaklis', 'carsona']
+Topic 13: ['uvcc', 'vplot', 'sakikov', 'kulkhandanian', 'hyperspheres', 'tractinsky', 'spacefood', 'maicoletta', 'hzr']
+Topic 14: ['pwatkins', 'bhjnuy', 'alalim', 'xfontstruct', 'devvax', 'jbotz', 'hdsteven', 'uakron', 'vidugiris']
+Topic 15: ['chzv', 'jdsiegel', 'delab', 'driver', 'dolby', 'hhtra', 'kovat', 'kjznah', 'drivers']
+Topic 16: ['pictcompressor', 'wmich', 'zyeh', 'kaltiyin', 'jyaruss', 'scrowe', 'tekbspa', 'wingif', 'fraering']
+Topic 17: ['xcreatefontcursor', 'zhenghao', 'satellies', 'xkeyevent', 'tbfw', 'chevreil', 'salesdroids', 'bulev', 'ucivax']
+Topic 18: ['mwvm', 'sunvis', 'xmain', 'drinckes', 'yadlowsky', 'situiations', 'xtnlabel', 'xphoon', 'oneb']
+Topic 19: ['mlinsenb', 'andreychuck', 'nevz', 'dppeak', 'throgaw', 'stcarm', 'pwiseman', 'jemurray', 'anasir']
+Topic 20: ['forefeit', 'menangitis', 'erctitan', 'knsl', 'nidhog', 'atlastele', 'rasterops', 'dyynamic', 'affore']
+Topic 21: ['evensont', 'aqz', 'interestend', 'aelmg', 'tcbruno', 'mamv', 'cmgrawbu', 'trights', 'citicens']
+Topic 22: ['rlkt', 'idbsu', 'killclient', 'bpirenne', 'mqir', 'ffritze', 'mantick', 'resuply', 'chatnam']
+Topic 23: ['rrrraggggah', 'ecqm', 'kozloce', 'riceburner', 'dkeisen', 'thennarangam', 'silevitch', 'hstx', 'cxtgc']
+Topic 24: ['easteee', 'cptully', 'ftzv', 'protein', 'csufresno', 'ggrrrrrr', 'jfriedl', 'yongje', 'xtappsetwarningmsghandler']
+Topic 25: ['oqshz', 'nswses', 'libxm', 'rsadsi', 'cryptophones', 'deburie', 'adrg', 'databehandling', 'cheinan']
+Topic 26: ['tommc', 'shzd', 'eatchar', 'werple', 'rflab', 'xsetwmnormalhints', 'hbloom', 'cmkrnl', 'kisseberth']
+Topic 27: ['xtgetapplicationresources', 'olcyzk', 'udelvm', 'watsun', 'rastek', 'tsiao', 'wafffling', 'lanera', 'uoknor']
+Topic 28: ['bboards', 'iamac', 'hzrb', 'firsteps', 'bdira', 'macwireframe', 'gildelaar', 'artieb', 'feserve']
+Topic 29: ['obdis', 'turkozu', 'hintmatt', 'jyusenkyou', 'tutanaklar', 'charproc', 'mpmena', 'xtdisplaystringconversionwarning', 'simonsom']
+Topic 30: ['inn', 'ecclesisatical', 'commonview', 'gjhsun', 'ftpso', 'kotspt', 'rbdy', 'bmug', 'tombaker']
+Topic 31: ['ralcgm', 'sawitsky', 'ynyi', 'dscy', 'inputonly', 'oecjtb', 'wpcom', 'oeinck', 'teledisk']
+Topic 32: ['xdart', 'hemmorrhoid', 'omnimovie', 'geoffb', 'ggeorge', 'vamwendt', 'viamar', 'gcohen', 'chavnist']
+Topic 33: ['joesbar', 'makaleler', 'patapis', 'rbdy', 'machbanding', 'rbarris', 'jodfishe', 'vsloutsk', 'hielsche']
+Topic 34: ['gchin', 'boebert', 'hipsaddon', 'hamazasp', 'xmol', 'irresponible', 'hplb', 'schuerzinger', 'klaty']
+Topic 35: ['kmoffatt', 'feathr', 'sevr', 'jjctc', 'agallagh', 'mrsr', 'cbnewsb', 'redistributable', 'dgbt']
+Topic 36: ['techreports', 'ebenin', 'wynblatt', 'ssdgwy', 'cjkuo', 'apchardel', 'tcmay', 'namelplate', 'vllyoak']
+Topic 37: ['qdeck', 'robink', 'xtkmg', 'snifing', 'yamanari', 'wmbxlt', 'cfairman', 'taces', 'plebrun']
+Topic 38: ['airmw', 'thennarangam', 'voxelbox', 'urmw', 'atfedilen', 'anasir', 'vesikalariyla', 'ymon', 'winqvtnet']
+Topic 39: ['ccreegan', 'bassili', 'liddelow', 'wibbled', 'rpastes', 'mailrp', 'ocracy', 'environmenmts', 'aboyko']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+
+
+Epoch: 1 .. batch: 2/12 .. LR: 0.002 .. KL_theta: 0.03 .. Rec_loss: 1366.09 .. NELBO: 1366.12
+Epoch: 1 .. batch: 4/12 .. LR: 0.002 .. KL_theta: 0.14 .. Rec_loss: 1399.33 .. NELBO: 1399.47
+Epoch: 1 .. batch: 6/12 .. LR: 0.002 .. KL_theta: 0.56 .. Rec_loss: 1401.87 .. NELBO: 1402.43
+Epoch: 1 .. batch: 8/12 .. LR: 0.002 .. KL_theta: 1.0 .. Rec_loss: 1410.03 .. NELBO: 1411.03
+Epoch: 1 .. batch: 10/12 .. LR: 0.002 .. KL_theta: 1.15 .. Rec_loss: 1395.97 .. NELBO: 1397.12
+Timestamp:  Thursday, 12. December 2019 08:51PM
+****************************************************************************************************
+Epoch----->1 .. LR: 0.002 .. KL_theta: 1.16 .. Rec_loss: 1391.11 .. NELBO: 1392.27
+****************************************************************************************************
+****************************************************************************************************
+VAL Doc Completion PPL: 41692.0
+****************************************************************************************************
+This is the evaluation of epoch 1 :  41692.0
+####################################################################################################
+Visualize topics...
+Topic 0: ['drozinst', 'football', 'game', 'heinbokel', 'basketball', 'pmartz', 'ron', 'senators', 'lzsc']
+Topic 1: ['raid', 'kimd', 'cuurrently', 'wesf', 'command', 'argument', 'designatted', 'arguments', 'xtshellstrings']
+Topic 2: ['password', 'rocketshare', 'username', 'privacy', 'login', 'cisco', 'passwords', 'disclaimer', 'dumps']
+Topic 3: ['wwarf', 'aftersleep', 'xpermits', 'xsetwmnormalhints', 'uknet', 'rinaco', 'writes', 'ap', 'atfedilen']
+Topic 4: ['labelfontlist', 'arpci', 'thulmaten', 'linux', 'skjegg', 'ttesta', 'gassanov', 'chinalake', 'jmaynard']
+Topic 5: ['windows', 'ednclark', 'apeldoornseweg', 'intuitivness', 'linux', 'file', 'clipbychildren', 'unified', 'concurance']
+Topic 6: ['colormapped', 'pscript', 'prasadr', 'jgnassi', 'bctel', 'kjzpeu', 'zkef', 'hirgun', 'vipunen']
+Topic 7: ['microsoft', 'sony', 'anonymous', 'canon', 'auvm', 'password', 'paslowp', 'listen', 'chenlin']
+Topic 8: ['university', 'adisak', 'foolerie', 'stanford', 'jessea', 'hemmorrhoid', 'usc', 'qrpl', 'ucla']
+Topic 9: ['utc', 'gmt', 'climate', 'microsoft', 'login', 'rnmac', 'outlook', 'iran', 'zabitlari']
+Topic 10: ['gcohen', 'issst', 'ccreegan', 'iwii', 'rechnerbetrieb', 'wcsbeau', 'unsubscribe', 'biosym', 'pajise']
+Topic 11: ['windows', 'univesa', 'gpinzone', 'server', 'beta', 'obbase', 'cache', 'cpu', 'opengl']
+Topic 12: ['aftersleep', 'dkgi', 'kirchoefer', 'karaklis', 'hpdesk', 'tasallot', 'ebuhcb', 'raporu', 'rnivh']
+Topic 13: ['rtrue', 'gumru', 'uvcc', 'maicoletta', 'spacefood', 'odiselidge', 'accusors', 'smauldin', 'vplot']
+Topic 14: ['insrtructed', 'bhjnuy', 'alalim', 'gmt', 'xfontstruct', 'ddjmag', 'devvax', 'ubvm', 'ncramer']
+Topic 15: ['driver', 'kjznah', 'drivers', 'iso', 'sony', 'chzv', 'jdsiegel', 'hp', 'dolby']
+Topic 16: ['zyeh', 'server', 'pictcompressor', 'scrowe', 'destroynotify', 'printer', 'jyaruss', 'cisco', 'ibm']
+Topic 17: ['zhenghao', 'ronaldm', 'acrv', 'hemmorrhoid', 'tbfw', 'economics', 'schroede', 'ucivax', 'obmotowashing']
+Topic 18: ['sunvis', 'ibm', 'parikhma', 'mamuretulaziz', 'mwvm', 'mvanheyn', 'xphoon', 'moraltiy', 'sql']
+Topic 19: ['andreychuck', 'xapplresdir', 'hayesstw', 'kiniklioglu', 'mlinsenb', 'quarda', 'iesd', 'nevz', 'jemurray']
+Topic 20: ['forefeit', 'fstobdf', 'herniss', 'menangitis', 'roscom', 'umbdrv', 'ererything', 'slqfbql', 'jjjjjjj']
+Topic 21: ['evensont', 'genetics', 'psyrobtw', 'interestend', 'thesis', 'auvm', 'thulmaten', 'uqei', 'vuseg']
+Topic 22: ['rlkt', 'hayesstw', 'rnivh', 'khfnl', 'idbsu', 'gunumuze', 'chiftlik', 'vikings', 'resuply']
+Topic 23: ['hemmorrhoid', 'operoni', 'njdevils', 'kozloce', 'bresheeth', 'silikian', 'silevitch', 'cxtgc', 'hpsadwc']
+Topic 24: ['cptully', 'nba', 'game', 'rockets', 'jmaynard', 'beta', 'pm', 'microtimes', 'weapons']
+Topic 25: ['cryptophones', 'rsadsi', 'ahaley', 'nswses', 'tuwien', 'oeinck', 'adrg', 'xsetwmnormalhints', 'dosyalari']
+Topic 26: ['xsetwmnormalhints', 'shzd', 'eatchar', 'copyright', 'windows', 'zyeh', 'posted', 'disclaimer', 'blgtn']
+Topic 27: ['wafffling', 'server', 'elsegundoca', 'tsiao', 'udelvm', 'watsun', 'windows', 'linux', 'shahmuradian']
+Topic 28: ['bboards', 'iamac', 'bdira', 'harvard', 'scsi', 'subscriber', 'faculty', 'artieb', 'ennews']
+Topic 29: ['turkozu', 'xbell', 'hpsadwc', 'tutanaklar', 'hemmorrhoid', 'simonsom', 'lzsc', 'obdis', 'backmenu']
+Topic 30: ['tombaker', 'vasilion', 'ecclesisatical', 'thehulk', 'jobs', 'macliesh', 'zxxst', 'hpdesk', 'patch']
+Topic 31: ['jpaparel', 'xflick', 'oeinck', 'slacvx', 'gdnikoli', 'lkjz', 'tcmay', 'um', 'id']
+Topic 32: ['hemmorrhoid', 'gcohen', 'thu', 'kb', 'fri', 'edt', 'quote', 'utc', 'binolux']
+Topic 33: ['hpsadwc', 'armenische', 'quickring', 'mindtool', 'updatedir', 'ajwmw', 'xvoid', 'winecj', 'xsetwmnormalhints']
+Topic 34: ['rocketshare', 'windows', 'preussenstrasse', 'microsoft', 'visualidmask', 'linux', 'paslowp', 'rginzberg', 'iubacs']
+Topic 35: ['tekn', 'kmoffatt', 'utc', 'sevr', 'colormapped', 'xapplresdir', 'fynv', 'fax', 'mouse']
+Topic 36: ['utc', 'hirgun', 'busfac', 'raytracers', 'doubledisk', 'techreports', 'wynblatt', 'txt', 'http']
+Topic 37: ['bctel', 'hpdesk', 'taces', 'xtkmg', 'mamuretulaziz', 'xtsetvalues', 'deluxeý', 'qdeck', 'theories']
+Topic 38: ['airmw', 'atfedilen', 'voxelbox', 'lhzri', 'thennarangam', 'cunixc', 'bandwidth', 'apagchw', 'qrpu']
+Topic 39: ['ccreegan', 'bojsen', 'liddelow', 'wibbled', 'ajwmw', 'objectworks', 'iso', 'kayun', 'microsoft']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+Epoch: 2 .. batch: 2/12 .. LR: 0.002 .. KL_theta: 1.28 .. Rec_loss: 1385.93 .. NELBO: 1387.21
+Epoch: 2 .. batch: 4/12 .. LR: 0.002 .. KL_theta: 1.65 .. Rec_loss: 1388.45 .. NELBO: 1390.1
+Epoch: 2 .. batch: 6/12 .. LR: 0.002 .. KL_theta: 2.21 .. Rec_loss: 1373.52 .. NELBO: 1375.73
+Epoch: 2 .. batch: 8/12 .. LR: 0.002 .. KL_theta: 2.56 .. Rec_loss: 1378.31 .. NELBO: 1380.87
+Epoch: 2 .. batch: 10/12 .. LR: 0.002 .. KL_theta: 2.65 .. Rec_loss: 1364.45 .. NELBO: 1367.1
+Timestamp:  Thursday, 12. December 2019 08:53PM
+****************************************************************************************************
+Epoch----->2 .. LR: 0.002 .. KL_theta: 2.65 .. Rec_loss: 1383.5 .. NELBO: 1386.15
+****************************************************************************************************
+****************************************************************************************************
+VAL Doc Completion PPL: 35313.7
+****************************************************************************************************
+This is the evaluation of epoch 2 :  35313.7
+####################################################################################################
+Visualize topics...
+Topic 0: ['game', 'nba', 'bible', 'hey', 'football', 'chris', 'senators', 'basketball', 'ron']
+Topic 1: ['argument', 'article', 'linux', 'raid', 'arguments', 'kimd', 'command', 'error', 'question']
+Topic 2: ['password', 'rocketshare', 'username', 'privacy', 'id', 'login', 'policy', 'server', 'microsoft']
+Topic 3: ['wwarf', 'writes', 'linux', 'backup', 'delete', 'write', 'article', 'xsetwmnormalhints', 'message']
+Topic 4: ['linux', 'windows', 'unix', 'server', 'ibm', 'password', 'thulmaten', 'microsoft', 'kernel']
+Topic 5: ['windows', 'linux', 'file', 'microsoft', 'writes', 'xp', 'server', 'backup', 'vista']
+Topic 6: ['colormapped', 'bctel', 'pscript', 'intel', 'issst', 'timeout', 'zkef', 'prasadr', 'kjzpeu']
+Topic 7: ['microsoft', 'anonymous', 'linux', 'canon', 'bible', 'write', 'password', 'writes', 'argument']
+Topic 8: ['university', 'stanford', 'hemmorrhoid', 'usc', 'ucla', 'harvard', 'ssrbs', 'tech', 'notre']
+Topic 9: ['utc', 'gmt', 'microsoft', 'iraq', 'iran', 'policy', 'climate', 'israel', 'login']
+Topic 10: ['gcohen', 'issst', 'science', 'archive', 'newsgroups', 'bulletin', 'server', 'anonymous', 'university']
+Topic 11: ['windows', 'server', 'cache', 'cpu', 'browser', 'folder', 'rocketshare', 'file', 'vista']
+Topic 12: ['filename', 'printer', 'id', 'scanner', 'rnivh', 'iso', 'hpdesk', 'xp', 'bios']
+Topic 13: ['rtrue', 'rnivh', 'microsoft', 'gumru', 'odiselidge', 'cisco', 'accusors', 'hpdesk', 'maicoletta']
+Topic 14: ['gmt', 'microsoft', 'insrtructed', 'utc', 'message', 'linux', 'hemmorrhoid', 'reply', 'blaisec']
+Topic 15: ['linux', 'windows', 'sony', 'hp', 'driver', 'ibm', 'iso', 'drivers', 'microsoft']
+Topic 16: ['server', 'linux', 'microsoft', 'ibm', 'zyeh', 'printer', 'error', 'java', 'cisco']
+Topic 17: ['zhenghao', 'hemmorrhoid', 'economics', 'acrv', 'ronaldm', 'microsoft', 'biology', 'ibm', 'files']
+Topic 18: ['ibm', 'microsoft', 'parikhma', 'paslowp', 'windows', 'sql', 'mamuretulaziz', 'linux', 'server']
+Topic 19: ['xapplresdir', 'rocketshare', 'tpremo', 'andreychuck', 'kiniklioglu', 'bctel', 'iesd', 'motecc', 'golchowy']
+Topic 20: ['herniss', 'unix', 'microsoft', 'linux', 'intel', 'server', 'umbdrv', 'utc', 'login']
+Topic 21: ['microsoft', 'rnivh', 'bctel', 'thesis', 'biology', 'understand', 'linux', 'argue', 'xsetwmnormalhints']
+Topic 22: ['rnivh', 'vikings', 'nfl', 'mamuretulaziz', 'rlkt', 'texans', 'mlb', 'islanders', 'nhl']
+Topic 23: ['hemmorrhoid', 'wwarf', 'njdevils', 'linux', 'bresheeth', 'operoni', 'gpinzone', 'silikian', 'hpsadwc']
+Topic 24: ['nba', 'game', 'rnivh', 'cptully', 'physics', 'weapons', 'jmaynard', 'tue', 'gmt']
+Topic 25: ['issst', 'bctel', 'lakers', 'xsetwmnormalhints', 'rnivh', 'ahaley', 'gpinzone', 'cryptophones', 'nba']
+Topic 26: ['xsetwmnormalhints', 'microsoft', 'gmt', 'windows', 'copyright', 'linux', 'agree', 'disclaimer', 'reply']
+Topic 27: ['wafffling', 'server', 'linux', 'windows', 'unix', 'microsoft', 'error', 'sql', 'username']
+Topic 28: ['university', 'ibm', 'harvard', 'hemmorrhoid', 'scsi', 'uc', 'faculty', 'stanford', 'linux']
+Topic 29: ['hemmorrhoid', 'posting', 'hpsadwc', 'message', 'answer', 'lzsc', 'emails', 'gcohen', 'swdwan']
+Topic 30: ['jobs', 'thehulk', 'vasilion', 'tombaker', 'patch', 'issst', 'hpdesk', 'sql', 'java']
+Topic 31: ['linux', 'id', 'nt', 'server', 'unix', 'ot', 'jpaparel', 'draft', 'daytonoh']
+Topic 32: ['hemmorrhoid', 'gcohen', 'thu', 'utc', 'fri', 'error', 'server', 'kb', 'windows']
+Topic 33: ['hpsadwc', 'armenische', 'solve', 'xsetwmnormalhints', 'tpremo', 'ajwmw', 'wwarf', 'lgtgah', 'quickring']
+Topic 34: ['windows', 'linux', 'microsoft', 'server', 'rocketshare', 'unix', 'smtp', 'file', 'password']
+Topic 35: ['utc', 'microsoft', 'tekn', 'cisco', 'linux', 'error', 'colormapped', 'kmoffatt', 'nt']
+Topic 36: ['utc', 'hirgun', 'busfac', 'raytracers', 'http', 'message', 'microsoft', 'mb', 'doubledisk']
+Topic 37: ['bctel', 'hpdesk', 'mamuretulaziz', 'error', 'taces', 'mellodew', 'theory', 'wafffling', 'reasoning']
+Topic 38: ['writes', 'hemmorrhoid', 'lhzri', 'atfedilen', 'apagchw', 'rocketshare', 'bandwidth', 'rnivh', 'airmw']
+Topic 39: ['ccreegan', 'microsoft', 'bojsen', 'linux', 'iso', 'ibm', 'rocketshare', 'thu', 'ajwmw']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+Epoch: 3 .. batch: 2/12 .. LR: 0.002 .. KL_theta: 3.8 .. Rec_loss: 1397.54 .. NELBO: 1401.34
+Epoch: 3 .. batch: 4/12 .. LR: 0.002 .. KL_theta: 3.78 .. Rec_loss: 1359.09 .. NELBO: 1362.87
+Epoch: 3 .. batch: 6/12 .. LR: 0.002 .. KL_theta: 3.54 .. Rec_loss: 1348.28 .. NELBO: 1351.82
+Epoch: 3 .. batch: 8/12 .. LR: 0.002 .. KL_theta: 3.49 .. Rec_loss: 1337.22 .. NELBO: 1340.71
+Epoch: 3 .. batch: 10/12 .. LR: 0.002 .. KL_theta: 3.67 .. Rec_loss: 1348.75 .. NELBO: 1352.42
+Timestamp:  Thursday, 12. December 2019 08:55PM
+****************************************************************************************************
+Epoch----->3 .. LR: 0.002 .. KL_theta: 3.81 .. Rec_loss: 1344.3 .. NELBO: 1348.11
+****************************************************************************************************
+****************************************************************************************************
+VAL Doc Completion PPL: 30488.0
+****************************************************************************************************
+This is the evaluation of epoch 3 :  30488.0
+####################################################################################################
+Visualize topics...
+Topic 0: ['game', 'hey', 'chris', 'bible', 'paslowp', 'nba', 'matt', 'dont', 'god']
+Topic 1: ['linux', 'article', 'argument', 'microsoft', 'windows', 'error', 'ibm', 'question', 'unix']
+Topic 2: ['rocketshare', 'password', 'id', 'privacy', 'policy', 'username', 'server', 'login', 'microsoft']
+Topic 3: ['linux', 'wwarf', 'writes', 'backup', 'article', 'message', 'server', 'microsoft', 'delete']
+Topic 4: ['linux', 'windows', 'unix', 'server', 'ibm', 'microsoft', 'os', 'computer', 'kernel']
+Topic 5: ['windows', 'linux', 'file', 'microsoft', 'server', 'writes', 'xp', 'computer', 'intel']
+Topic 6: ['intel', 'server', 'ibm', 'linux', 'ghz', 'pscript', 'windows', 'bctel', 'cisco']
+Topic 7: ['anonymous', 'israel', 'microsoft', 'bible', 'argument', 'policy', 'id', 'answer', 'article']
+Topic 8: ['university', 'stanford', 'tech', 'harvard', 'usc', 'ucla', 'hemmorrhoid', 'ibm', 'ssrbs']
+Topic 9: ['israel', 'iraq', 'iran', 'utc', 'christians', 'palestinians', 'gmt', 'policy', 'answer']
+Topic 10: ['server', 'linux', 'university', 'science', 'gcohen', 'newsgroups', 'microsoft', 'archive', 'issst']
+Topic 11: ['windows', 'server', 'linux', 'cpu', 'vista', 'file', 'microsoft', 'intel', 'xp']
+Topic 12: ['linux', 'windows', 'xp', 'printer', 'server', 'os', 'scanner', 'unix', 'bios']
+Topic 13: ['microsoft', 'ibm', 'linux', 'cisco', 'server', 'rnivh', 'intel', 'smtp', 'rocketshare']
+Topic 14: ['microsoft', 'linux', 'message', 'gmt', 'unix', 'utc', 'server', 'intel', 'nt']
+Topic 15: ['linux', 'ibm', 'windows', 'hp', 'microsoft', 'xp', 'sony', 'intel', 'driver']
+Topic 16: ['server', 'linux', 'ibm', 'microsoft', 'xp', 'printer', 'hp', 'windows', 'error']
+Topic 17: ['ibm', 'microsoft', 'server', 'linux', 'unix', 'windows', 'files', 'biology', 'economics']
+Topic 18: ['ibm', 'microsoft', 'linux', 'windows', 'server', 'unix', 'intel', 'paslowp', 'sql']
+Topic 19: ['rocketshare', 'xapplresdir', 'tpremo', 'bctel', 'iesd', 'motecc', 'kiniklioglu', 'hpwad', 'daytonoh']
+Topic 20: ['linux', 'unix', 'microsoft', 'server', 'intel', 'windows', 'ibm', 'os', 'xp']
+Topic 21: ['microsoft', 'linux', 'biology', 'university', 'bctel', 'rnivh', 'uc', 'thesis', 'understand']
+Topic 22: ['rnivh', 'microsoft', 'sony', 'ibm', 'mlb', 'vikings', 'nfl', 'intel', 'dell']
+Topic 23: ['linux', 'hemmorrhoid', 'wwarf', 'microsoft', 'forums', 'archive', 'bios', 'wafffling', 'org']
+Topic 24: ['nba', 'game', 'rnivh', 'physics', 'gmt', 'tech', 'tue', 'weapons', 'ot']
+Topic 25: ['lakers', 'issst', 'canucks', 'bctel', 'nba', 'rnivh', 'bruins', 'celtics', 'jmaynard']
+Topic 26: ['microsoft', 'linux', 'windows', 'gmt', 'xsetwmnormalhints', 'reply', 'copyright', 'agree', 'utc']
+Topic 27: ['linux', 'server', 'windows', 'unix', 'microsoft', 'wafffling', 'ibm', 'error', 'sql']
+Topic 28: ['ibm', 'university', 'linux', 'scsi', 'server', 'harvard', 'unix', 'stanford', 'uc']
+Topic 29: ['posting', 'ibm', 'hemmorrhoid', 'message', 'server', 'microsoft', 'linux', 'rocketshare', 'article']
+Topic 30: ['linux', 'server', 'microsoft', 'jobs', 'sql', 'java', 'patch', 'thehulk', 'tech']
+Topic 31: ['linux', 'server', 'unix', 'nt', 'id', 'computer', 'microsoft', 'university', 'ot']
+Topic 32: ['hemmorrhoid', 'windows', 'server', 'thu', 'linux', 'utc', 'fri', 'error', 'gcohen']
+Topic 33: ['linux', 'solve', 'microsoft', 'hpsadwc', 'xsetwmnormalhints', 'ibm', 'os', 'intel', 'armenische']
+Topic 34: ['windows', 'linux', 'server', 'microsoft', 'unix', 'rocketshare', 'smtp', 'servers', 'os']
+Topic 35: ['microsoft', 'linux', 'windows', 'ibm', 'server', 'utc', 'cisco', 'printer', 'nt']
+Topic 36: ['utc', 'microsoft', 'linux', 'server', 'http', 'message', 'mb', 'nt', 'java']
+Topic 37: ['linux', 'error', 'bctel', 'windows', 'hpdesk', 'microsoft', 'xp', 'mamuretulaziz', 'ibm']
+Topic 38: ['writes', 'linux', 'hemmorrhoid', 'rocketshare', 'server', 'ip', 'bandwidth', 'university', 'atfedilen']
+Topic 39: ['microsoft', 'linux', 'ibm', 'intel', 'server', 'iso', 'rocketshare', 'thu', 'sql']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+Epoch: 4 .. batch: 2/12 .. LR: 0.002 .. KL_theta: 4.7 .. Rec_loss: 1397.48 .. NELBO: 1402.18
+Epoch: 4 .. batch: 4/12 .. LR: 0.002 .. KL_theta: 4.66 .. Rec_loss: 1350.46 .. NELBO: 1355.12
+Epoch: 4 .. batch: 6/12 .. LR: 0.002 .. KL_theta: 4.81 .. Rec_loss: 1333.82 .. NELBO: 1338.63
+Epoch: 4 .. batch: 8/12 .. LR: 0.002 .. KL_theta: 4.78 .. Rec_loss: 1323.38 .. NELBO: 1328.16
+Epoch: 4 .. batch: 10/12 .. LR: 0.002 .. KL_theta: 4.91 .. Rec_loss: 1328.9 .. NELBO: 1333.81
+Timestamp:  Thursday, 12. December 2019 08:57PM
+****************************************************************************************************
+Epoch----->4 .. LR: 0.002 .. KL_theta: 4.98 .. Rec_loss: 1321.52 .. NELBO: 1326.5
+****************************************************************************************************
+****************************************************************************************************
+VAL Doc Completion PPL: 26811.0
+****************************************************************************************************
+This is the evaluation of epoch 4 :  26811.0
+####################################################################################################
+Visualize topics...
+Topic 0: ['chris', 'hey', 'game', 'paslowp', 'matt', 'mike', 'dont', 'steve', 'nba']
+Topic 1: ['linux', 'article', 'windows', 'microsoft', 'ibm', 'unix', 'error', 'nt', 'argument']
+Topic 2: ['rocketshare', 'password', 'id', 'server', 'microsoft', 'linux', 'privacy', 'username', 'policy']
+Topic 3: ['linux', 'backup', 'server', 'windows', 'writes', 'microsoft', 'wwarf', 'article', 'message']
+Topic 4: ['linux', 'windows', 'server', 'unix', 'ibm', 'microsoft', 'os', 'computer', 'xp']
+Topic 5: ['windows', 'linux', 'microsoft', 'server', 'file', 'xp', 'computer', 'intel', 'backup']
+Topic 6: ['linux', 'ibm', 'server', 'intel', 'ghz', 'windows', 'microsoft', 'unix', 'cpu']
+Topic 7: ['israel', 'christians', 'bible', 'argument', 'policy', 'law', 'iraq', 'anonymous', 'americans']
+Topic 8: ['university', 'stanford', 'ibm', 'tech', 'computer', 'harvard', 'college', 'physics', 'uc']
+Topic 9: ['christians', 'israel', 'iraq', 'muslims', 'palestinians', 'iran', 'jews', 'answer', 'islam']
+Topic 10: ['server', 'linux', 'university', 'microsoft', 'newsgroups', 'windows', 'science', 'gcohen', 'archive']
+Topic 11: ['windows', 'server', 'linux', 'xp', 'os', 'cpu', 'microsoft', 'vista', 'intel']
+Topic 12: ['linux', 'windows', 'xp', 'server', 'ghz', 'printer', 'os', 'unix', 'cpu']
+Topic 13: ['microsoft', 'linux', 'ibm', 'server', 'intel', 'cisco', 'windows', 'unix', 'smtp']
+Topic 14: ['linux', 'microsoft', 'unix', 'server', 'windows', 'intel', 'xp', 'os', 'nt']
+Topic 15: ['linux', 'ibm', 'windows', 'hp', 'microsoft', 'xp', 'intel', 'sony', 'driver']
+Topic 16: ['linux', 'server', 'ibm', 'microsoft', 'xp', 'hp', 'windows', 'printer', 'intel']
+Topic 17: ['ibm', 'server', 'linux', 'microsoft', 'windows', 'unix', 'computer', 'smtp', 'files']
+Topic 18: ['ibm', 'microsoft', 'linux', 'windows', 'server', 'unix', 'intel', 'xp', 'compaq']
+Topic 19: ['rocketshare', 'xapplresdir', 'tpremo', 'iesd', 'hp', 'jmaynard', 'hpwad', 'galvint', 'id']
+Topic 20: ['linux', 'server', 'unix', 'microsoft', 'windows', 'ibm', 'intel', 'os', 'xp']
+Topic 21: ['linux', 'microsoft', 'university', 'biology', 'ibm', 'uc', 'unix', 'server', 'ms']
+Topic 22: ['ibm', 'microsoft', 'intel', 'hp', 'sony', 'dell', 'gb', 'mlb', 'mb']
+Topic 23: ['linux', 'microsoft', 'wwarf', 'windows', 'server', 'ibm', 'os', 'unix', 'bios']
+Topic 24: ['game', 'nba', 'physics', 'rnivh', 'tech', 'ot', 'win', 'dont', 'playoffs']
+Topic 25: ['canucks', 'lakers', 'bruins', 'jmaynard', 'mlb', 'ssrbs', 'issst', 'nba', 'sox']
+Topic 26: ['microsoft', 'linux', 'windows', 'gmt', 'reply', 'ibm', 'xsetwmnormalhints', 'quote', 'message']
+Topic 27: ['linux', 'server', 'windows', 'unix', 'microsoft', 'ibm', 'os', 'sql', 'xp']
+Topic 28: ['ibm', 'university', 'linux', 'server', 'scsi', 'unix', 'stanford', 'mit', 'uc']
+Topic 29: ['ibm', 'linux', 'posting', 'server', 'rocketshare', 'microsoft', 'message', 'article', 'thread']
+Topic 30: ['linux', 'server', 'microsoft', 'windows', 'ibm', 'sql', 'tech', 'java', 'patch']
+Topic 31: ['linux', 'server', 'unix', 'computer', 'nt', 'microsoft', 'ibm', 'windows', 'id']
+Topic 32: ['windows', 'linux', 'server', 'xp', 'thu', 'error', 'microsoft', 'utc', 'fri']
+Topic 33: ['linux', 'ibm', 'microsoft', 'intel', 'os', 'hp', 'server', 'windows', 'computer']
+Topic 34: ['windows', 'linux', 'server', 'microsoft', 'unix', 'os', 'smtp', 'xp', 'servers']
+Topic 35: ['linux', 'microsoft', 'windows', 'ibm', 'server', 'xp', 'printer', 'intel', 'hp']
+Topic 36: ['linux', 'utc', 'microsoft', 'server', 'backup', 'http', 'unix', 'ibm', 'message']
+Topic 37: ['linux', 'windows', 'microsoft', 'xp', 'ibm', 'error', 'unix', 'server', 'intel']
+Topic 38: ['linux', 'writes', 'server', 'rocketshare', 'ieee', 'university', 'ibm', 'ip', 'unix']
+Topic 39: ['microsoft', 'linux', 'ibm', 'intel', 'server', 'iso', 'unix', 'mb', 'rocketshare']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+Epoch: 5 .. batch: 2/12 .. LR: 0.002 .. KL_theta: 4.7 .. Rec_loss: 1324.36 .. NELBO: 1329.06
+Epoch: 5 .. batch: 4/12 .. LR: 0.002 .. KL_theta: 5.11 .. Rec_loss: 1327.58 .. NELBO: 1332.69
+Epoch: 5 .. batch: 6/12 .. LR: 0.002 .. KL_theta: 5.08 .. Rec_loss: 1312.24 .. NELBO: 1317.32
+Epoch: 5 .. batch: 8/12 .. LR: 0.002 .. KL_theta: 5.17 .. Rec_loss: 1318.46 .. NELBO: 1323.63
+Epoch: 5 .. batch: 10/12 .. LR: 0.002 .. KL_theta: 5.32 .. Rec_loss: 1308.16 .. NELBO: 1313.48
+Timestamp:  Thursday, 12. December 2019 08:59PM
+****************************************************************************************************
+Epoch----->5 .. LR: 0.002 .. KL_theta: 5.28 .. Rec_loss: 1311.31 .. NELBO: 1316.59
+****************************************************************************************************
+****************************************************************************************************
+VAL Doc Completion PPL: 23462.1
+****************************************************************************************************
+This is the evaluation of epoch 5 :  23462.1
+####################################################################################################
+Visualize topics...
+Topic 0: ['chris', 'matt', 'game', 'mike', 'hey', 'steve', 'paslowp', 'tim', 'stephen']
+Topic 1: ['linux', 'windows', 'article', 'ibm', 'microsoft', 'unix', 'error', 'nt', 'sql']
+Topic 2: ['rocketshare', 'server', 'linux', 'id', 'password', 'microsoft', 'ibm', 'windows', 'phone']
+Topic 3: ['linux', 'windows', 'server', 'backup', 'microsoft', 'writes', 'file', 'article', 'message']
+Topic 4: ['linux', 'windows', 'server', 'ibm', 'unix', 'disk', 'microsoft', 'xp', 'os']
+Topic 5: ['windows', 'linux', 'microsoft', 'server', 'xp', 'computer', 'file', 'intel', 'backup']
+Topic 6: ['ibm', 'linux', 'server', 'ghz', 'windows', 'intel', 'microsoft', 'unix', 'cpu']
+Topic 7: ['israel', 'christians', 'americans', 'iraq', 'god', 'muslims', 'law', 'palestinians', 'laws']
+Topic 8: ['university', 'stanford', 'college', 'harvard', 'ibm', 'computer', 'uc', 'tech', 'physics']
+Topic 9: ['christians', 'israel', 'muslims', 'iraq', 'palestinians', 'iran', 'jews', 'jesus', 'answer']
+Topic 10: ['server', 'linux', 'university', 'windows', 'microsoft', 'newsgroups', 'unix', 'gcohen', 'smtp']
+Topic 11: ['windows', 'server', 'linux', 'xp', 'disk', 'os', 'cpu', 'ghz', 'file']
+Topic 12: ['linux', 'windows', 'xp', 'ghz', 'server', 'printer', 'os', 'cpu', 'scsi']
+Topic 13: ['linux', 'microsoft', 'ibm', 'server', 'windows', 'intel', 'unix', 'smtp', 'cisco']
+Topic 14: ['linux', 'microsoft', 'unix', 'server', 'windows', 'xp', 'intel', 'os', 'ibm']
+Topic 15: ['hp', 'linux', 'ibm', 'windows', 'xp', 'intel', 'microsoft', 'os', 'compaq']
+Topic 16: ['linux', 'server', 'ibm', 'xp', 'microsoft', 'windows', 'hp', 'printer', 'intel']
+Topic 17: ['server', 'linux', 'ibm', 'windows', 'microsoft', 'unix', 'smtp', 'computer', 'ftp']
+Topic 18: ['ibm', 'linux', 'windows', 'microsoft', 'intel', 'server', 'unix', 'xp', 'cpu']
+Topic 19: ['rocketshare', 'hp', 'ibm', 'ghz', 'iso', 'xapplresdir', 'jmaynard', 'ieee', 'engine']
+Topic 20: ['linux', 'server', 'windows', 'unix', 'microsoft', 'ibm', 'intel', 'os', 'xp']
+Topic 21: ['linux', 'microsoft', 'university', 'biology', 'ibm', 'server', 'unix', 'uc', 'windows']
+Topic 22: ['ibm', 'hp', 'microsoft', 'intel', 'gb', 'ghz', 'dell', 'linux', 'sony']
+Topic 23: ['linux', 'windows', 'microsoft', 'server', 'ibm', 'unix', 'os', 'intel', 'bios']
+Topic 24: ['game', 'nba', 'tech', 'physics', 'win', 'playoffs', 'ot', 'fri', 'guys']
+Topic 25: ['canucks', 'lakers', 'bruins', 'mlb', 'sox', 'jmaynard', 'mets', 'ssrbs', 'matt']
+Topic 26: ['linux', 'microsoft', 'windows', 'ibm', 'reply', 'gmt', 'quote', 'tue', 'message']
+Topic 27: ['linux', 'windows', 'server', 'unix', 'microsoft', 'ibm', 'os', 'xp', 'sql']
+Topic 28: ['university', 'ibm', 'linux', 'server', 'scsi', 'stanford', 'mit', 'unix', 'uc']
+Topic 29: ['linux', 'posting', 'ibm', 'server', 'rocketshare', 'thread', 'post', 'reply', 'unix']
+Topic 30: ['linux', 'server', 'windows', 'microsoft', 'ibm', 'unix', 'sql', 'tech', 'intel']
+Topic 31: ['linux', 'server', 'unix', 'computer', 'ibm', 'microsoft', 'windows', 'nt', 'tech']
+Topic 32: ['windows', 'linux', 'server', 'xp', 'microsoft', 'os', 'computer', 'intel', 'ibm']
+Topic 33: ['linux', 'ibm', 'hp', 'intel', 'microsoft', 'windows', 'computer', 'ghz', 'server']
+Topic 34: ['windows', 'linux', 'server', 'microsoft', 'unix', 'os', 'xp', 'smtp', 'servers']
+Topic 35: ['linux', 'windows', 'microsoft', 'ibm', 'server', 'xp', 'hp', 'intel', 'printer']
+Topic 36: ['linux', 'server', 'microsoft', 'utc', 'ibm', 'backup', 'unix', 'windows', 'mb']
+Topic 37: ['linux', 'windows', 'microsoft', 'ibm', 'xp', 'unix', 'server', 'intel', 'os']
+Topic 38: ['linux', 'server', 'writes', 'ibm', 'ieee', 'university', 'unix', 'computer', 'windows']
+Topic 39: ['ibm', 'microsoft', 'linux', 'intel', 'server', 'ghz', 'hp', 'iso', 'max']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+Epoch: 6 .. batch: 2/12 .. LR: 0.002 .. KL_theta: 5.78 .. Rec_loss: 1276.43 .. NELBO: 1282.21
+Epoch: 6 .. batch: 4/12 .. LR: 0.002 .. KL_theta: 5.92 .. Rec_loss: 1282.37 .. NELBO: 1288.29
+Epoch: 6 .. batch: 6/12 .. LR: 0.002 .. KL_theta: 5.97 .. Rec_loss: 1300.74 .. NELBO: 1306.71
+Epoch: 6 .. batch: 8/12 .. LR: 0.002 .. KL_theta: 5.96 .. Rec_loss: 1289.18 .. NELBO: 1295.14
+Epoch: 6 .. batch: 10/12 .. LR: 0.002 .. KL_theta: 6.13 .. Rec_loss: 1298.25 .. NELBO: 1304.38
+Timestamp:  Thursday, 12. December 2019 09:01PM
+****************************************************************************************************
+Epoch----->6 .. LR: 0.002 .. KL_theta: 6.1 .. Rec_loss: 1279.77 .. NELBO: 1285.87
+****************************************************************************************************
+****************************************************************************************************
+VAL Doc Completion PPL: 21102.8
+****************************************************************************************************
+This is the evaluation of epoch 6 :  21102.8
+####################################################################################################
+Visualize topics...
+Topic 0: ['chris', 'mike', 'matt', 'game', 'steve', 'tim', 'hey', 'stephen', 'andrew']
+Topic 1: ['linux', 'windows', 'ibm', 'article', 'microsoft', 'unix', 'error', 'backup', 'nt']
+Topic 2: ['server', 'linux', 'rocketshare', 'windows', 'id', 'phone', 'password', 'ibm', 'microsoft']
+Topic 3: ['linux', 'windows', 'server', 'backup', 'file', 'article', 'message', 'writes', 'microsoft']
+Topic 4: ['windows', 'linux', 'server', 'ibm', 'disk', 'unix', 'xp', 'os', 'computer']
+Topic 5: ['windows', 'linux', 'file', 'server', 'computer', 'xp', 'microsoft', 'backup', 'ibm']
+Topic 6: ['server', 'ibm', 'linux', 'windows', 'ghz', 'intel', 'microsoft', 'unix', 'cpu']
+Topic 7: ['israel', 'christians', 'god', 'americans', 'jesus', 'law', 'iraq', 'muslims', 'laws']
+Topic 8: ['university', 'stanford', 'college', 'harvard', 'professor', 'sciences', 'uc', 'rutgers', 'graduate']
+Topic 9: ['christians', 'israel', 'muslims', 'iraq', 'answer', 'jesus', 'palestinians', 'god', 'question']
+Topic 10: ['server', 'linux', 'university', 'windows', 'newsgroups', 'microsoft', 'smtp', 'ftp', 'unix']
+Topic 11: ['windows', 'server', 'linux', 'file', 'disk', 'xp', 'os', 'ftp', 'ntfs']
+Topic 12: ['windows', 'linux', 'ghz', 'server', 'xp', 'printer', 'cpu', 'disk', 'scsi']
+Topic 13: ['linux', 'server', 'ibm', 'microsoft', 'windows', 'unix', 'intel', 'smtp', 'ieee']
+Topic 14: ['linux', 'microsoft', 'server', 'unix', 'windows', 'xp', 'intel', 'ibm', 'os']
+Topic 15: ['hp', 'windows', 'ibm', 'linux', 'xp', 'intel', 'microsoft', 'ghz', 'compaq']
+Topic 16: ['linux', 'server', 'ibm', 'xp', 'windows', 'hp', 'microsoft', 'printer', 'intel']
+Topic 17: ['server', 'windows', 'linux', 'smtp', 'ibm', 'unix', 'ftp', 'microsoft', 'nntp']
+Topic 18: ['ibm', 'windows', 'linux', 'microsoft', 'intel', 'server', 'xp', 'unix', 'hp']
+Topic 19: ['hp', 'rocketshare', 'ibm', 'ghz', 'engine', 'iso', 'ieee', 'adapter', 'jmaynard']
+Topic 20: ['linux', 'server', 'windows', 'unix', 'ibm', 'microsoft', 'xp', 'os', 'ghz']
+Topic 21: ['linux', 'microsoft', 'university', 'ibm', 'server', 'biology', 'unix', 'windows', 'tech']
+Topic 22: ['ibm', 'hp', 'gb', 'microsoft', 'intel', 'ghz', 'dell', 'linux', 'sony']
+Topic 23: ['linux', 'windows', 'server', 'microsoft', 'ibm', 'unix', 'os', 'ftp', 'intel']
+Topic 24: ['game', 'nba', 'win', 'tech', 'playoffs', 'physics', 'linux', 'mlb', 'ot']
+Topic 25: ['canucks', 'bruins', 'mlb', 'sox', 'lakers', 'nhl', 'mets', 'matt', 'chris']
+Topic 26: ['linux', 'windows', 'microsoft', 'reply', 'ibm', 'quote', 'gmt', 'tue', 'message']
+Topic 27: ['linux', 'windows', 'server', 'unix', 'ibm', 'microsoft', 'os', 'xp', 'sql']
+Topic 28: ['university', 'ibm', 'server', 'stanford', 'linux', 'mit', 'uc', 'scsi', 'biology']
+Topic 29: ['posting', 'post', 'reply', 'thread', 'linux', 'rocketshare', 'article', 'server', 'email']
+Topic 30: ['linux', 'server', 'windows', 'microsoft', 'ibm', 'unix', 'sql', 'software', 'tech']
+Topic 31: ['linux', 'server', 'ibm', 'unix', 'computer', 'windows', 'microsoft', 'tech', 'nt']
+Topic 32: ['windows', 'linux', 'xp', 'server', 'os', 'microsoft', 'computer', 'ibm', 'intel']
+Topic 33: ['linux', 'ibm', 'hp', 'ghz', 'intel', 'windows', 'computer', 'microsoft', 'cpu']
+Topic 34: ['windows', 'server', 'linux', 'microsoft', 'unix', 'smtp', 'xp', 'os', 'software']
+Topic 35: ['windows', 'linux', 'ibm', 'microsoft', 'server', 'xp', 'hp', 'intel', 'computer']
+Topic 36: ['linux', 'server', 'microsoft', 'ibm', 'backup', 'unix', 'windows', 'utc', 'mb']
+Topic 37: ['linux', 'windows', 'ibm', 'microsoft', 'xp', 'unix', 'server', 'intel', 'software']
+Topic 38: ['linux', 'server', 'writes', 'ibm', 'ieee', 'university', 'computer', 'windows', 'unix']
+Topic 39: ['ibm', 'max', 'linux', 'intel', 'microsoft', 'ghz', 'hp', 'gb', 'iso']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+Epoch: 7 .. batch: 2/12 .. LR: 0.002 .. KL_theta: 6.81 .. Rec_loss: 1316.87 .. NELBO: 1323.68
+Epoch: 7 .. batch: 4/12 .. LR: 0.002 .. KL_theta: 6.62 .. Rec_loss: 1310.91 .. NELBO: 1317.53
+Epoch: 7 .. batch: 6/12 .. LR: 0.002 .. KL_theta: 6.68 .. Rec_loss: 1296.0 .. NELBO: 1302.68
+Epoch: 7 .. batch: 8/12 .. LR: 0.002 .. KL_theta: 6.81 .. Rec_loss: 1293.15 .. NELBO: 1299.96
+Epoch: 7 .. batch: 10/12 .. LR: 0.002 .. KL_theta: 6.83 .. Rec_loss: 1281.87 .. NELBO: 1288.7
+Timestamp:  Thursday, 12. December 2019 09:03PM
+****************************************************************************************************
+Epoch----->7 .. LR: 0.002 .. KL_theta: 6.98 .. Rec_loss: 1281.26 .. NELBO: 1288.24
+****************************************************************************************************
+****************************************************************************************************
+VAL Doc Completion PPL: 19390.4
+****************************************************************************************************
+This is the evaluation of epoch 7 :  19390.4
+####################################################################################################
+Visualize topics...
+Topic 0: ['chris', 'mike', 'matt', 'steve', 'tim', 'game', 'jon', 'dave', 'joe']
+Topic 1: ['linux', 'windows', 'article', 'ibm', 'microsoft', 'unix', 'error', 'backup', 'hp']
+Topic 2: ['server', 'phone', 'rocketshare', 'linux', 'windows', 'id', 'fax', 'password', 'ibm']
+Topic 3: ['linux', 'article', 'email', 'file', 'windows', 'server', 'message', 'backup', 'writes']
+Topic 4: ['windows', 'linux', 'disk', 'ibm', 'server', 'computer', 'xp', 'unix', 'os']
+Topic 5: ['windows', 'linux', 'file', 'computer', 'server', 'xp', 'microsoft', 'backup', 'disk']
+Topic 6: ['ibm', 'server', 'windows', 'linux', 'ghz', 'intel', 'microsoft', 'computer', 'ieee']
+Topic 7: ['god', 'israel', 'christians', 'americans', 'people', 'jesus', 'law', 'article', 'understand']
+Topic 8: ['university', 'stanford', 'college', 'harvard', 'professor', 'sciences', 'rutgers', 'graduate', 'faculty']
+Topic 9: ['christians', 'israel', 'answer', 'question', 'iraq', 'argument', 'muslims', 'god', 'ca']
+Topic 10: ['server', 'linux', 'university', 'newsgroups', 'smtp', 'windows', 'ftp', 'nntp', 'microsoft']
+Topic 11: ['windows', 'server', 'file', 'disk', 'linux', 'xp', 'files', 'mb', 'ftp']
+Topic 12: ['windows', 'ghz', 'printer', 'linux', 'disk', 'xp', 'server', 'scsi', 'adapter']
+Topic 13: ['server', 'linux', 'ibm', 'microsoft', 'windows', 'unix', 'smtp', 'ieee', 'intel']
+Topic 14: ['linux', 'microsoft', 'server', 'unix', 'windows', 'user', 'reply', 'xp', 'ibm']
+Topic 15: ['windows', 'hp', 'ibm', 'linux', 'xp', 'intel', 'ghz', 'driver', 'microsoft']
+Topic 16: ['linux', 'server', 'ibm', 'windows', 'hp', 'xp', 'printer', 'microsoft', 'cpu']
+Topic 17: ['nntp', 'server', 'smtp', 'ftp', 'windows', 'linux', 'telnet', 'unix', 'newsgroups']
+Topic 18: ['ibm', 'windows', 'linux', 'intel', 'microsoft', 'xp', 'hp', 'server', 'cpu']
+Topic 19: ['hp', 'ibm', 'rocketshare', 'ghz', 'engine', 'ieee', 'iso', 'cc', 'adapter']
+Topic 20: ['server', 'linux', 'windows', 'unix', 'ibm', 'file', 'microsoft', 'ghz', 'xp']
+Topic 21: ['linux', 'university', 'microsoft', 'ibm', 'server', 'windows', 'unix', 'biology', 'tech']
+Topic 22: ['ibm', 'hp', 'gb', 'intel', 'microsoft', 'ghz', 'mlb', 'nhl', 'dell']
+Topic 23: ['linux', 'windows', 'server', 'ibm', 'microsoft', 'unix', 'ftp', 'os', 'backup']
+Topic 24: ['game', 'nba', 'win', 'playoffs', 'tech', 'mlb', 'player', 'sox', 'physics']
+Topic 25: ['canucks', 'bruins', 'nhl', 'sox', 'mlb', 'leafs', 'blackhawks', 'yankees', 'mets']
+Topic 26: ['linux', 'windows', 'microsoft', 'reply', 'ibm', 'quote', 'message', 'post', 'tue']
+Topic 27: ['linux', 'server', 'windows', 'unix', 'ibm', 'microsoft', 'file', 'os', 'sql']
+Topic 28: ['university', 'ibm', 'host', 'stanford', 'server', 'mit', 'uc', 'biology', 'faculty']
+Topic 29: ['posting', 'post', 'reply', 'thread', 'article', 'email', 'posts', 'quote', 'message']
+Topic 30: ['server', 'linux', 'windows', 'microsoft', 'ibm', 'unix', 'sql', 'rocketshare', 'smtp']
+Topic 31: ['linux', 'server', 'ibm', 'computer', 'unix', 'windows', 'microsoft', 'tech', 'hp']
+Topic 32: ['windows', 'linux', 'server', 'xp', 'os', 'computer', 'ibm', 'cpu', 'error']
+Topic 33: ['hp', 'ibm', 'linux', 'ghz', 'intel', 'computer', 'windows', 'cpu', 'adapter']
+Topic 34: ['windows', 'server', 'linux', 'smtp', 'unix', 'microsoft', 'software', 'ftp', 'servers']
+Topic 35: ['windows', 'ibm', 'linux', 'microsoft', 'server', 'xp', 'hp', 'computer', 'intel']
+Topic 36: ['linux', 'server', 'microsoft', 'ibm', 'backup', 'windows', 'unix', 'utc', 'mb']
+Topic 37: ['linux', 'windows', 'ibm', 'microsoft', 'xp', 'unix', 'software', 'server', 'intel']
+Topic 38: ['linux', 'server', 'writes', 'ibm', 'ieee', 'university', 'computer', 'windows', 'unix']
+Topic 39: ['max', 'ghz', 'ibm', 'gb', 'hp', 'intel', 'iso', 'microsoft', 'cpu']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+Epoch: 8 .. batch: 2/12 .. LR: 0.002 .. KL_theta: 7.41 .. Rec_loss: 1285.54 .. NELBO: 1292.95
+Epoch: 8 .. batch: 4/12 .. LR: 0.002 .. KL_theta: 7.58 .. Rec_loss: 1294.14 .. NELBO: 1301.72
+Epoch: 8 .. batch: 6/12 .. LR: 0.002 .. KL_theta: 7.5 .. Rec_loss: 1300.53 .. NELBO: 1308.03
+Epoch: 8 .. batch: 8/12 .. LR: 0.002 .. KL_theta: 7.64 .. Rec_loss: 1270.7 .. NELBO: 1278.34
+Epoch: 8 .. batch: 10/12 .. LR: 0.002 .. KL_theta: 7.61 .. Rec_loss: 1270.39 .. NELBO: 1278.0
+Timestamp:  Thursday, 12. December 2019 09:05PM
+****************************************************************************************************
+Epoch----->8 .. LR: 0.002 .. KL_theta: 7.68 .. Rec_loss: 1270.39 .. NELBO: 1278.07
+****************************************************************************************************
+****************************************************************************************************
+VAL Doc Completion PPL: 18065.4
+****************************************************************************************************
+This is the evaluation of epoch 8 :  18065.4
+####################################################################################################
+Visualize topics...
+Topic 0: ['chris', 'mike', 'matt', 'steve', 'tim', 'dave', 'jon', 'joe', 'game']
+Topic 1: ['linux', 'article', 'windows', 'ibm', 'microsoft', 'backup', 'error', 'unix', 'hp']
+Topic 2: ['phone', 'server', 'fax', 'rocketshare', 'info', 'linux', 'id', 'windows', 'password']
+Topic 3: ['article', 'email', 'writes', 'message', 'posting', 'linux', 'mail', 'post', 'file']
+Topic 4: ['windows', 'disk', 'computer', 'linux', 'ibm', 'xp', 'server', 'gb', 'software']
+Topic 5: ['windows', 'file', 'linux', 'computer', 'server', 'xp', 'disk', 'backup', 'software']
+Topic 6: ['ibm', 'server', 'windows', 'linux', 'computer', 'ghz', 'ieee', 'intel', 'microsoft']
+Topic 7: ['god', 'people', 'israel', 'americans', 'article', 'law', 'ca', 'jesus', 'christians']
+Topic 8: ['university', 'stanford', 'college', 'harvard', 'sciences', 'professor', 'institute', 'rutgers', 'cornell']
+Topic 9: ['answer', 'christians', 'israel', 'question', 'ca', 'argument', 'id', 'washington', 'iraq']
+Topic 10: ['server', 'university', 'linux', 'newsgroups', 'smtp', 'nntp', 'ftp', 'windows', 'servers']
+Topic 11: ['windows', 'file', 'server', 'disk', 'files', 'mb', 'format', 'xp', 'gb']
+Topic 12: ['windows', 'disk', 'printer', 'ghz', 'scsi', 'xp', 'adapter', 'interface', 'server']
+Topic 13: ['ibm', 'server', 'microsoft', 'linux', 'windows', 'ieee', 'unix', 'smtp', 'intel']
+Topic 14: ['linux', 'reply', 'microsoft', 'unix', 'message', 'server', 'windows', 'user', 'ibm']
+Topic 15: ['windows', 'hp', 'ibm', 'xp', 'linux', 'ghz', 'driver', 'intel', 'gb']
+Topic 16: ['ibm', 'server', 'linux', 'printer', 'hp', 'windows', 'xp', 'file', 'cpu']
+Topic 17: ['nntp', 'smtp', 'server', 'ftp', 'newsgroups', 'usenet', 'telnet', 'windows', 'newsgroup']
+Topic 18: ['ibm', 'windows', 'intel', 'linux', 'hp', 'microsoft', 'computer', 'xp', 'cpu']
+Topic 19: ['hp', 'ibm', 'engine', 'ghz', 'rocketshare', 'cc', 'ieee', 'cs', 'systems']
+Topic 20: ['server', 'windows', 'linux', 'file', 'ibm', 'unix', 'ghz', 'microsoft', 'printer']
+Topic 21: ['university', 'linux', 'microsoft', 'ibm', 'server', 'tech', 'stanford', 'software', 'biology']
+Topic 22: ['ibm', 'nhl', 'mlb', 'gb', 'hp', 'canadiens', 'sox', 'bruins', 'yankees']
+Topic 23: ['linux', 'windows', 'ibm', 'server', 'microsoft', 'unix', 'ieee', 'ftp', 'http']
+Topic 24: ['game', 'win', 'playoffs', 'nba', 'player', 'mlb', 'sox', 'nhl', 'bruins']
+Topic 25: ['canucks', 'nhl', 'bruins', 'leafs', 'blackhawks', 'sox', 'canadiens', 'yankees', 'mlb']
+Topic 26: ['linux', 'reply', 'windows', 'microsoft', 'quote', 'ibm', 'post', 'message', 'email']
+Topic 27: ['server', 'windows', 'linux', 'unix', 'file', 'ibm', 'microsoft', 'files', 'error']
+Topic 28: ['university', 'host', 'stanford', 'server', 'mit', 'ibm', 'uc', 'biology', 'faculty']
+Topic 29: ['posting', 'post', 'reply', 'article', 'thread', 'posts', 'email', 'replying', 'quote']
+Topic 30: ['server', 'linux', 'windows', 'microsoft', 'ibm', 'rocketshare', 'unix', 'ieee', 'patch']
+Topic 31: ['linux', 'ibm', 'computer', 'server', 'unix', 'windows', 'microsoft', 'tech', 'university']
+Topic 32: ['windows', 'linux', 'server', 'xp', 'file', 'format', 'error', 'printer', 'os']
+Topic 33: ['hp', 'ibm', 'ghz', 'linux', 'computer', 'systems', 'windows', 'intel', 'cpu']
+Topic 34: ['windows', 'server', 'nntp', 'linux', 'smtp', 'software', 'unix', 'ftp', 'microsoft']
+Topic 35: ['windows', 'ibm', 'linux', 'microsoft', 'computer', 'server', 'hp', 'xp', 'intel']
+Topic 36: ['linux', 'server', 'microsoft', 'ibm', 'backup', 'windows', 'unix', 'utc', 'message']
+Topic 37: ['linux', 'windows', 'ibm', 'microsoft', 'posting', 'unix', 'software', 'xp', 'error']
+Topic 38: ['writes', 'linux', 'university', 'ibm', 'server', 'ieee', 'computer', 'systems', 'editor']
+Topic 39: ['max', 'ghz', 'gb', 'hp', 'iso', 'cpu', 'intel', 'mhz', 'mb']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+Epoch: 9 .. batch: 2/12 .. LR: 0.002 .. KL_theta: 8.28 .. Rec_loss: 1322.52 .. NELBO: 1330.8
+Epoch: 9 .. batch: 4/12 .. LR: 0.002 .. KL_theta: 7.92 .. Rec_loss: 1265.01 .. NELBO: 1272.93
+Epoch: 9 .. batch: 6/12 .. LR: 0.002 .. KL_theta: 8.0 .. Rec_loss: 1252.57 .. NELBO: 1260.57
+Epoch: 9 .. batch: 8/12 .. LR: 0.002 .. KL_theta: 8.03 .. Rec_loss: 1264.12 .. NELBO: 1272.15
+Epoch: 9 .. batch: 10/12 .. LR: 0.002 .. KL_theta: 8.07 .. Rec_loss: 1254.6 .. NELBO: 1262.67
+Timestamp:  Thursday, 12. December 2019 09:07PM
+****************************************************************************************************
+Epoch----->9 .. LR: 0.002 .. KL_theta: 8.15 .. Rec_loss: 1276.6 .. NELBO: 1284.75
+****************************************************************************************************
+****************************************************************************************************
+VAL Doc Completion PPL: 17376.5
+****************************************************************************************************
+This is the evaluation of epoch 9 :  17376.5
+####################################################################################################
+Visualize topics...
+Topic 0: ['mike', 'chris', 'steve', 'matt', 'tim', 'dave', 'jon', 'brian', 'joe']
+Topic 1: ['linux', 'article', 'windows', 'ibm', 'microsoft', 'backup', 'error', 'hp', 'patch']
+Topic 2: ['phone', 'fax', 'info', 'server', 'id', 'rocketshare', 'email', 'windows', 'linux']
+Topic 3: ['article', 'writes', 'email', 'post', 'message', 'posting', 'mail', 'write', 'reply']
+Topic 4: ['windows', 'disk', 'computer', 'ibm', 'software', 'xp', 'gb', 'linux', 'file']
+Topic 5: ['windows', 'file', 'computer', 'linux', 'server', 'disk', 'software', 'files', 'xp']
+Topic 6: ['ibm', 'cs', 'server', 'computer', 'ieee', 'windows', 'hp', 'systems', 'software']
+Topic 7: ['god', 'people', 'israel', 'ca', 'article', 'law', 'americans', 'jesus', 'question']
+Topic 8: ['university', 'stanford', 'college', 'institute', 'sciences', 'harvard', 'engineering', 'mit', 'rutgers']
+Topic 9: ['answer', 'christians', 'ca', 'question', 'israel', 'argument', 'washington', 'id', 'utc']
+Topic 10: ['server', 'university', 'newsgroups', 'linux', 'smtp', 'host', 'nntp', 'ftp', 'servers']
+Topic 11: ['file', 'windows', 'files', 'disk', 'format', 'server', 'mb', 'gb', 'folder']
+Topic 12: ['windows', 'disk', 'file', 'printer', 'scsi', 'interface', 'computer', 'format', 'adapter']
+Topic 13: ['ibm', 'microsoft', 'server', 'linux', 'ieee', 'windows', 'unix', 'intel', 'hp']
+Topic 14: ['reply', 'message', 'linux', 'microsoft', 'unix', 'user', 'email', 'ibm', 'windows']
+Topic 15: ['windows', 'hp', 'ibm', 'xp', 'ghz', 'driver', 'linux', 'gb', 'disk']
+Topic 16: ['printer', 'ibm', 'windows', 'server', 'file', 'hp', 'disk', 'linux', 'xp']
+Topic 17: ['nntp', 'smtp', 'newsgroups', 'usenet', 'ftp', 'server', 'telnet', 'newsgroup', 'mail']
+Topic 18: ['ibm', 'windows', 'hp', 'intel', 'computer', 'linux', 'microsoft', 'xp', 'cpu']
+Topic 19: ['hp', 'ibm', 'engine', 'cs', 'cc', 'systems', 'ieee', 'tech', 'ghz']
+Topic 20: ['file', 'server', 'windows', 'linux', 'ibm', 'unix', 'files', 'format', 'backup']
+Topic 21: ['university', 'linux', 'ibm', 'microsoft', 'tech', 'stanford', 'uc', 'biology', 'engineering']
+Topic 22: ['nhl', 'canadiens', 'mlb', 'bruins', 'yankees', 'sox', 'win', 'game', 'rangers']
+Topic 23: ['linux', 'ibm', 'windows', 'org', 'microsoft', 'server', 'ieee', 'http', 'tech']
+Topic 24: ['game', 'playoffs', 'win', 'nba', 'player', 'nhl', 'mlb', 'sox', 'bruins']
+Topic 25: ['nhl', 'bruins', 'canucks', 'leafs', 'blackhawks', 'canadiens', 'sox', 'yankees', 'puck']
+Topic 26: ['reply', 'linux', 'quote', 'windows', 'microsoft', 'ibm', 'post', 'email', 'message']
+Topic 27: ['windows', 'server', 'linux', 'file', 'unix', 'ibm', 'files', 'error', 'email']
+Topic 28: ['host', 'university', 'hosts', 'server', 'stanford', 'hosting', 'mit', 'uc', 'biology']
+Topic 29: ['posting', 'post', 'reply', 'article', 'posts', 'thread', 'comment', 'email', 'replying']
+Topic 30: ['server', 'linux', 'windows', 'ibm', 'rocketshare', 'microsoft', 'ieee', 'tech', 'patch']
+Topic 31: ['linux', 'ibm', 'computer', 'server', 'tech', 'windows', 'microsoft', 'university', 'unix']
+Topic 32: ['windows', 'file', 'linux', 'server', 'format', 'error', 'xp', 'printer', 'files']
+Topic 33: ['hp', 'ibm', 'systems', 'computer', 'ghz', 'linux', 'adapter', 'windows', 'system']
+Topic 34: ['windows', 'server', 'nntp', 'software', 'smtp', 'linux', 'file', 'mail', 'fax']
+Topic 35: ['ibm', 'windows', 'computer', 'linux', 'microsoft', 'hp', 'server', 'intel', 'xp']
+Topic 36: ['linux', 'ibm', 'server', 'microsoft', 'backup', 'writes', 'tech', 'university', 'windows']
+Topic 37: ['ibm', 'linux', 'windows', 'posting', 'microsoft', 'software', 'unix', 'intel', 'error']
+Topic 38: ['writes', 'university', 'linux', 'ibm', 'computer', 'ieee', 'systems', 'server', 'communications']
+Topic 39: ['max', 'ghz', 'gb', 'hp', 'iso', 'speed', 'cpu', 'mhz', 'db']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+Visualizing model quality after training...
+####################################################################################################
+Visualize topics...
+Topic 0: ['mike', 'chris', 'steve', 'matt', 'tim', 'dave', 'jon', 'brian', 'joe']
+Topic 1: ['linux', 'article', 'windows', 'ibm', 'microsoft', 'backup', 'error', 'hp', 'patch']
+Topic 2: ['phone', 'fax', 'info', 'server', 'id', 'rocketshare', 'email', 'windows', 'linux']
+Topic 3: ['article', 'writes', 'email', 'post', 'message', 'posting', 'mail', 'write', 'reply']
+Topic 4: ['windows', 'disk', 'computer', 'ibm', 'software', 'xp', 'gb', 'linux', 'file']
+Topic 5: ['windows', 'file', 'computer', 'linux', 'server', 'disk', 'software', 'files', 'xp']
+Topic 6: ['ibm', 'cs', 'server', 'computer', 'ieee', 'windows', 'hp', 'systems', 'software']
+Topic 7: ['god', 'people', 'israel', 'ca', 'article', 'law', 'americans', 'jesus', 'question']
+Topic 8: ['university', 'stanford', 'college', 'institute', 'sciences', 'harvard', 'engineering', 'mit', 'rutgers']
+Topic 9: ['answer', 'christians', 'ca', 'question', 'israel', 'argument', 'washington', 'id', 'utc']
+Topic 10: ['server', 'university', 'newsgroups', 'linux', 'smtp', 'host', 'nntp', 'ftp', 'servers']
+Topic 11: ['file', 'windows', 'files', 'disk', 'format', 'server', 'mb', 'gb', 'folder']
+Topic 12: ['windows', 'disk', 'file', 'printer', 'scsi', 'interface', 'computer', 'format', 'adapter']
+Topic 13: ['ibm', 'microsoft', 'server', 'linux', 'ieee', 'windows', 'unix', 'intel', 'hp']
+Topic 14: ['reply', 'message', 'linux', 'microsoft', 'unix', 'user', 'email', 'ibm', 'windows']
+Topic 15: ['windows', 'hp', 'ibm', 'xp', 'ghz', 'driver', 'linux', 'gb', 'disk']
+Topic 16: ['printer', 'ibm', 'windows', 'server', 'file', 'hp', 'disk', 'linux', 'xp']
+Topic 17: ['nntp', 'smtp', 'newsgroups', 'usenet', 'ftp', 'server', 'telnet', 'newsgroup', 'mail']
+Topic 18: ['ibm', 'windows', 'hp', 'intel', 'computer', 'linux', 'microsoft', 'xp', 'cpu']
+Topic 19: ['hp', 'ibm', 'engine', 'cs', 'cc', 'systems', 'ieee', 'tech', 'ghz']
+Topic 20: ['file', 'server', 'windows', 'linux', 'ibm', 'unix', 'files', 'format', 'backup']
+Topic 21: ['university', 'linux', 'ibm', 'microsoft', 'tech', 'stanford', 'uc', 'biology', 'engineering']
+Topic 22: ['nhl', 'canadiens', 'mlb', 'bruins', 'yankees', 'sox', 'win', 'game', 'rangers']
+Topic 23: ['linux', 'ibm', 'windows', 'org', 'microsoft', 'server', 'ieee', 'http', 'tech']
+Topic 24: ['game', 'playoffs', 'win', 'nba', 'player', 'nhl', 'mlb', 'sox', 'bruins']
+Topic 25: ['nhl', 'bruins', 'canucks', 'leafs', 'blackhawks', 'canadiens', 'sox', 'yankees', 'puck']
+Topic 26: ['reply', 'linux', 'quote', 'windows', 'microsoft', 'ibm', 'post', 'email', 'message']
+Topic 27: ['windows', 'server', 'linux', 'file', 'unix', 'ibm', 'files', 'error', 'email']
+Topic 28: ['host', 'university', 'hosts', 'server', 'stanford', 'hosting', 'mit', 'uc', 'biology']
+Topic 29: ['posting', 'post', 'reply', 'article', 'posts', 'thread', 'comment', 'email', 'replying']
+Topic 30: ['server', 'linux', 'windows', 'ibm', 'rocketshare', 'microsoft', 'ieee', 'tech', 'patch']
+Topic 31: ['linux', 'ibm', 'computer', 'server', 'tech', 'windows', 'microsoft', 'university', 'unix']
+Topic 32: ['windows', 'file', 'linux', 'server', 'format', 'error', 'xp', 'printer', 'files']
+Topic 33: ['hp', 'ibm', 'systems', 'computer', 'ghz', 'linux', 'adapter', 'windows', 'system']
+Topic 34: ['windows', 'server', 'nntp', 'software', 'smtp', 'linux', 'file', 'mail', 'fax']
+Topic 35: ['ibm', 'windows', 'computer', 'linux', 'microsoft', 'hp', 'server', 'intel', 'xp']
+Topic 36: ['linux', 'ibm', 'server', 'microsoft', 'backup', 'writes', 'tech', 'university', 'windows']
+Topic 37: ['ibm', 'linux', 'windows', 'posting', 'microsoft', 'software', 'unix', 'intel', 'error']
+Topic 38: ['writes', 'university', 'linux', 'ibm', 'computer', 'ieee', 'systems', 'server', 'communications']
+Topic 39: ['max', 'ghz', 'gb', 'hp', 'iso', 'speed', 'cpu', 'mhz', 'db']
+####################################################################################################
+Visualize word embeddings by using output embedding matrix
+vectors:  (52258, 300)
+query:  (300,)
+word: andrew .. neighbors: ['andrew', 'stephen', 'brian', 'david', 'scott', 'michael', 'andy', 'alan', 'ian', 'kevin', 'robert', 'peter', 'alex', 'jonathan', 'chris', 'patrick', 'james', 'nicholas', 'richard', 'smith']
+vectors:  (52258, 300)
+query:  (300,)
+word: computer .. neighbors: ['computer', 'computers', 'pc', 'software', 'laptop', 'computing', 'desktop', 'electronics', 'systems', 'hardware', 'technology', 'laptops', 'system', 'internet', 'multimedia', 'electronic', 'gaming', 'device', 'monitor', 'devices']
+vectors:  (52258, 300)
+query:  (300,)
+word: sports .. neighbors: ['sports', 'sport', 'football', 'sporting', 'basketball', 'soccer', 'baseball', 'tennis', 'news', 'entertainment', 'hockey', 'athletic', 'recreation', 'athletics', 'fitness', 'golf', 'racing', 'nfl', 'athletes', 'leisure']
+vectors:  (52258, 300)
+query:  (300,)
+word: religion .. neighbors: ['religion', 'christianity', 'religions', 'religious', 'islam', 'belief', 'spirituality', 'beliefs', 'faith', 'morality', 'judaism', 'politics', 'theology', 'christians', 'culture', 'ideology', 'atheism', 'philosophy', 'catholicism', 'hinduism']
+vectors:  (52258, 300)
+query:  (300,)
+word: man .. neighbors: ['man', 'woman', 'guy', 'boy', 'men', 'person', 'dude', 'thing', 'girl', 'young', 'guys', 'thought', 'father', 'dead', 'god', 'good', 'gentleman', 'people', 'kind', 'mind']
+vectors:  (52258, 300)
+query:  (300,)
+word: love .. neighbors: ['love', 'loved', 'loves', 'loving', 'hope', 'hate', 'happy', 'great', 'good', 'thing', 'wonderful', 'feel', 'life', 'things', 'remember', 'amazing', 'enjoy', 'friends', 'girl', 'thought']
+vectors:  (52258, 300)
+query:  (300,)
+word: intelligence .. neighbors: ['intelligence', 'knowledge', 'cia', 'insight', 'security', 'capabilities', 'ability', 'expertise', 'military', 'capability', 'strategic', 'human', 'understanding', 'leadership', 'sense', 'analytics', 'forces', 'analysis', 'agency', 'reporting']
+vectors:  (52258, 300)
+query:  (300,)
+word: money .. neighbors: ['money', 'cash', 'dollars', 'pay', 'paying', 'funds', 'paid', 'make', 'spend', 'give', 'giving', 'put', 'making', 'worth', 'afford', 'amount', 'invest', 'profits', 'buying', 'wealth']
+vectors:  (52258, 300)
+query:  (300,)
+word: politics .. neighbors: ['politics', 'political', 'religion', 'democracy', 'elections', 'activism', 'debate', 'culture', 'politicians', 'economics', 'election', 'liberal', 'government', 'social', 'democratic', 'debates', 'journalism', 'ideology', 'rhetoric', 'conservative']
+vectors:  (52258, 300)
+query:  (300,)
+word: health .. neighbors: ['health', 'care', 'healthcare', 'medical', 'nutrition', 'education', 'benefits', 'mental', 'medicine', 'insurance', 'healthy', 'clinic', 'welfare', 'hospital', 'services', 'benefit', 'prevention', 'research', 'social', 'food']
+vectors:  (52258, 300)
+query:  (300,)
+word: people .. neighbors: ['people', 'folks', 'individuals', 'things', 'make', 'thing', 'thought', 'fact', 'person', 'americans', 'understand', 'reason', 'making', 'realize', 'give', 'ways', 'talking', 'lives', 'put', 'kind']
+vectors:  (52258, 300)
+query:  (300,)
+word: family .. neighbors: ['family', 'families', 'parents', 'friends', 'children', 'home', 'mother', 'father', 'lives', 'living', 'life', 'husband', 'loved', 'relatives', 'dad', 'daughter', 'grandparents', 'house', 'child', 'wife']
+####################################################################################################
+Maximum best epoch:  9
+Maximum best validation score:  17376.5
+List of all validation scores:  [41692.0, 35313.7, 30488.0, 26811.0, 23462.1, 21102.8, 19390.4, 18065.4, 17376.5]
+****************************************************************************************************
+VAL Doc Completion PPL: 17376.5
+****************************************************************************************************

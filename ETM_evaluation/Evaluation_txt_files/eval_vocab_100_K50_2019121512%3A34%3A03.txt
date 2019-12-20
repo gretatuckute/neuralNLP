@@ -1,0 +1,192 @@
+
+
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* out.txt
+Training an Embedded Topic Model on 20NG_MIN_DF_100 with the following settings: Namespace(anneal_lr=0, batch_size=1000, bow_norm=1, clip=0.0, data_path='data/min_df_100', dataset='20ng_min_df_100', emb_path='data/20ng_embeddings.txt', emb_size=300, enc_drop=0.0, epochs=20, eval_batch_size=1000, load_from='/om/user/gretatu/ETM-master/results_df_100/etm_20ng_min_df_100_K_50_Htheta_800_Optim_adam_Clip_0.0_ThetaAct_relu_Lr_0.002_Bsz_1000_RhoSize_300_trainEmbeddings_1', log_interval=2, lr=0.002, lr_factor=4.0, mode='eval', nonmono=10, num_docs_test=7531, num_docs_test_1=7531, num_docs_test_2=7531, num_docs_train=11214, num_docs_valid=100, num_topics=50, num_words=10, optimizer='adam', rho_size=300, save_path='./results', seed=2019, t_hidden_size=800, tc=1, td=1, theta_act='relu', train_embeddings=1, visualize_every=10, vocab_size=3102, wdecay=1.2e-06)
+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+model: ETM(
+  (t_drop): Dropout(p=0.0, inplace=False)
+  (theta_act): ReLU()
+  (rho): Linear(in_features=300, out_features=3102, bias=False)
+  (alphas): Linear(in_features=300, out_features=50, bias=False)
+  (q_theta): Sequential(
+    (0): Linear(in_features=3102, out_features=800, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=800, out_features=800, bias=True)
+    (3): ReLU()
+  )
+  (mu_q_theta): Linear(in_features=800, out_features=50, bias=True)
+  (logsigma_q_theta): Linear(in_features=800, out_features=50, bias=True)
+)
+****************************************************************************************************
+TEST Doc Completion PPL: 1659.8
+****************************************************************************************************
+Computing topic coherence...
+D:  11214
+k: 0/50
+k: 1/50
+k: 2/50
+k: 3/50
+k: 4/50
+k: 5/50
+k: 6/50
+k: 7/50
+k: 8/50
+k: 9/50
+k: 10/50
+k: 11/50
+k: 12/50
+k: 13/50
+k: 14/50
+k: 15/50
+k: 16/50
+k: 17/50
+k: 18/50
+k: 19/50
+k: 20/50
+k: 21/50
+k: 22/50
+k: 23/50
+k: 24/50
+k: 25/50
+k: 26/50
+k: 27/50
+k: 28/50
+k: 29/50
+k: 30/50
+k: 31/50
+k: 32/50
+k: 33/50
+k: 34/50
+k: 35/50
+k: 36/50
+k: 37/50
+k: 38/50
+k: 39/50
+k: 40/50
+k: 41/50
+k: 42/50
+k: 43/50
+k: 44/50
+k: 45/50
+k: 46/50
+k: 47/50
+k: 48/50
+k: 49/50
+counter:  55
+num topics:  50
+Topic coherence is: 0.18673448194416611
+Computing topic diversity...
+Topic diveristy is: 0.548
+
+The 10 most used topics are [12 30  9 13 37 47 49 21 31 16]
+tensor([[9.1856e-07, 2.9550e-04, 1.0445e-03,  ..., 5.5753e-06, 6.4943e-07,
+         7.0787e-07],
+        [3.0639e-07, 8.1237e-07, 3.9891e-06,  ..., 5.8877e-07, 1.3251e-06,
+         1.5916e-07],
+        [4.1590e-04, 1.9688e-04, 3.6273e-07,  ..., 2.5216e-04, 1.0185e-06,
+         5.7903e-04],
+        ...,
+        [4.3938e-06, 3.4662e-04, 1.0719e-07,  ..., 3.0921e-05, 4.2079e-04,
+         1.7066e-06],
+        [3.3668e-07, 2.3670e-05, 3.2019e-06,  ..., 2.0265e-06, 7.4504e-07,
+         7.8614e-05],
+        [4.1401e-07, 2.3700e-06, 1.9892e-05,  ..., 1.3650e-06, 1.6459e-05,
+         7.2676e-07]])
+
+
+Topic 0: ['sale', 'access', 'digex', 'offer', 'mil', 'shipping', 'pat', 'navy', 'condition']
+Topic 1: ['cs', 'cc', 'andrew', 'cmu', 'colorado', 'columbia', 'university', 'utexas', 'austin']
+Topic 2: ['people', 'men', 'article', 'writes', 'sex', 'cramer', 'drugs', 'optilink', 'gay']
+Topic 3: ['university', 'posting', 'host', 'nntp', 'article', 'distribution', 'writes', 'reply', 'computer']
+Topic 4: ['buy', 'price', 'money', 'market', 'good', 'apple', 'cost', 'pay', 'service']
+Topic 5: ['org', 'mark', 'jim', 'robert', 'virginia', 'stanford', 'mot', 'att', 'bob']
+Topic 6: ['time', 'good', 'problem', 'back', 'long', 'years', 'work', 'ago', 'problems']
+Topic 7: ['back', 'left', 'time', 'day', 'problem', 'side', 'pain', 'hit', 'ball']
+Topic 8: ['posting', 'university', 'host', 'nntp', 'distribution', 'computer', 'reply', 'article', 'usa']
+Topic 9: ['israel', 'israeli', 'turkish', 'jews', 'armenian', 'people', 'armenians', 'armenia', 'turks']
+Topic 10: ['writes', 'article', 'david', 'netcom', 'opinions', 'michael', 'world', 'reply', 'net']
+Topic 11: ['time', 'good', 'problem', 'back', 'long', 'years', 'work', 'find', 'thing']
+Topic 12: ['god', 'jesus', 'christian', 'bible', 'christians', 'people', 'church', 'faith', 'christ']
+Topic 13: ['gun', 'guns', 'people', 'fbi', 'weapons', 'fire', 'law', 'stratus', 'firearms']
+Topic 14: ['car', 'dod', 'bike', 'cars', 'engine', 'road', 'ride', 'front', 'speed']
+Topic 15: ['windows', 'dos', 'driver', 'system', 'file', 'mouse', 'files', 'os', 'drivers']
+Topic 16: ['president', 'mr', 'clinton', 'people', 'government', 'jobs', 'tax', 'insurance', 'health']
+Topic 17: ['max', 'ah', 'mr', 'tm', 'ma', 'air', 'sp', 'si', 'mi']
+Topic 18: ['writes', 'article', 'good', 'make', 'people', 'things', 'thing', 'real', 'lot']
+Topic 19: ['writes', 'article', 'david', 'opinions', 'world', 'michael', 'netcom', 'reply', 'net']
+Topic 20: ['writes', 'good', 'people', 'make', 'article', 'things', 'thing', 'lot', 'real']
+Topic 21: ['window', 'file', 'program', 'output', 'set', 'display', 'application', 'widget', 'server']
+Topic 22: ['time', 'good', 'years', 'writes', 'long', 'back', 'make', 'problem', 'thing']
+Topic 23: ['uk', 'ac', 'de', 'au', 'ibm', 'mit', 'mail', 'uni', 'germany']
+Topic 24: ['david', 'netcom', 'net', 'michael', 'gov', 'bill', 'writes', 'tom', 'article']
+Topic 25: ['sun', 'washington', 'berkeley', 'posting', 'nntp', 'host', 'apr', 'indiana', 'university']
+Topic 26: ['posting', 'university', 'host', 'nntp', 'distribution', 'computer', 'reply', 'world', 'usa']
+Topic 27: ['university', 'posting', 'nntp', 'host', 'distribution', 'computer', 'reply', 'usa', 'world']
+Topic 28: ['power', 'water', 'ground', 'wire', 'circuit', 'current', 'audio', 'high', 'signal']
+Topic 29: ['people', 'system', 'morality', 'objective', 'moral', 'law', 'rights', 'human', 'islam']
+Topic 30: ['game', 'team', 'year', 'play', 'games', 'hockey', 'season', 'players', 'win']
+Topic 31: ['space', 'nasa', 'gov', 'moon', 'earth', 'launch', 'orbit', 'lunar', 'mission']
+Topic 32: ['post', 'group', 'newsgroup', 'claim', 'read', 'question', 'book', 'point', 'discussion']
+Topic 33: ['time', 'good', 'back', 'years', 'long', 'problem', 'ago', 'thing', 'bad']
+Topic 34: ['people', 'make', 'writes', 'good', 'article', 'things', 'thing', 'real', 'lot']
+Topic 35: ['people', 'things', 'life', 'world', 'make', 'good', 'person', 'bad', 'live']
+Topic 36: ['posting', 'university', 'host', 'nntp', 'distribution', 'computer', 'article', 'reply', 'world']
+Topic 37: ['graphics', 'image', 'ftp', 'software', 'version', 'data', 'pub', 'files', 'gif']
+Topic 38: ['science', 'medical', 'food', 'disease', 'scientific', 'health', 'people', 'patients', 'medicine']
+Topic 39: ['uiuc', 'ohio', 'cwru', 'state', 'pitt', 'cleveland', 'keith', 'acs', 'caltech']
+Topic 40: ['people', 'time', 'told', 'home', 'started', 'left', 'back', 'building', 'happened']
+Topic 41: ['books', 'time', 'points', 'book', 'point', 'theory', 'system', 'reference', 'find']
+Topic 42: ['ca', 'hp', 'newsreader', 'version', 'tin', 'canada', 'bnr', 'wrote', 'research']
+Topic 43: ['university', 'posting', 'nntp', 'host', 'distribution', 'computer', 'usa', 'reply', 'mail']
+Topic 44: ['list', 'mail', 'internet', 'faq', 'information', 'email', 'send', 'anonymous', 'sci']
+Topic 45: ['university', 'posting', 'host', 'nntp', 'distribution', 'computer', 'usa', 'reply', 'keywords']
+Topic 46: ['information', 'university', 'national', 'california', 'san', 'april', 'american', 'center', 'research']
+Topic 47: ['key', 'chip', 'encryption', 'clipper', 'keys', 'government', 'des', 'security', 'law']
+Topic 48: ['writes', 'article', 'david', 'opinions', 'michael', 'netcom', 'world', 'net', 'reply']
+Topic 49: ['drive', 'scsi', 'card', 'mac', 'disk', 'video', 'bit', 'system', 'bus']
+This is my Rho ETM-Matrix: 
+
+
+
+ETM embeddings...
+vectors:  (3102, 300)
+query:  (300,)
+word: andrew .. etm neighbors: ['andrew', 'ted', 'utexas', 'denver', 'carnegie', 'midway', 'mellon', 'cmu', 'prism', 'buffalo', 'uga', 'gatech', 'colorado', 'uchicago', 'nyx', 'columbia', 'umd', 'braves', 'atlanta', 'athens']
+vectors:  (3102, 300)
+query:  (300,)
+word: woman .. etm neighbors: ['woman', 'rape', 'justified', 'alive', 'lives', 'women', 'neighbor', 'guilty', 'died', 'punishment', 'suffering', 'born', 'beliefs', 'mental', 'killing', 'convince', 'hatred', 'victims', 'witness', 'chose']
+vectors:  (3102, 300)
+query:  (300,)
+word: computer .. etm neighbors: ['computer', 'technology', 'institute', 'software', 'computing', 'mail', 'internet', 'info', 'fax', 'host', 'network', 'university', 'connect', 'send', 'computers', 'posting', 'message', 'access', 'email', 'systems']
+vectors:  (3102, 300)
+query:  (300,)
+word: sports .. etm neighbors: ['sports', 'sport', 'minnesota', 'stats', 'rush', 'dog', 'clutch', 'uwaterloo', 'ticket', 'calgary', 'csd', 'riding', 'philadelphia', 'gold', 'club', 'shots', 'rock', 'carson', 'fans', 'player']
+vectors:  (3102, 300)
+query:  (300,)
+word: religion .. etm neighbors: ['religion', 'religious', 'moral', 'innocent', 'religions', 'peace', 'islam', 'nazis', 'faith', 'muslims', 'jews', 'islamic', 'minority', 'intent', 'christians', 'supreme', 'violence', 'deny', 'jew', 'punishment']
+vectors:  (3102, 300)
+query:  (300,)
+word: man .. etm neighbors: ['man', 'great', 'give', 'world', 'word', 'make', 'free', 'place', 'lost', 'good', 'remember', 'day', 'made', 'put', 'list', 'find', 'life', 'post', 'words', 'thought']
+vectors:  (3102, 300)
+query:  (300,)
+word: love .. etm neighbors: ['love', 'hell', 'friends', 'fool', 'sad', 'wise', 'thought', 'die', 'writes', 'meant', 'live', 'living', 'happened', 'sounds', 'deleted', 'forever', 'wrong', 'mind', 'death', 'hate']
+vectors:  (3102, 300)
+query:  (300,)
+word: intelligence .. etm neighbors: ['intelligence', 'artificial', 'liberty', 'congress', 'georgia', 'cnn', 'associate', 'clinton', 'proposal', 'attorney', 'maryland', 'political', 'funds', 'interests', 'represents', 'amendment', 'lance', 'colostate', 'citizens', 'uchicago']
+vectors:  (3102, 300)
+query:  (300,)
+word: money .. etm neighbors: ['money', 'paid', 'cost', 'spent', 'spend', 'extra', 'average', 'experience', 'benefit', 'plans', 'lot', 'sell', 'ahead', 'years', 'weekend', 'huge', 'greater', 'lower', 'business', 'expensive']
+vectors:  (3102, 300)
+query:  (300,)
+word: politics .. etm neighbors: ['politics', 'liberty', 'crime', 'liberal', 'defend', 'responsibility', 'governments', 'war', 'violent', 'constitution', 'bomb', 'violence', 'propaganda', 'citizens', 'civil', 'crimes', 'guilty', 'revolution', 'freedom', 'kids']
+vectors:  (3102, 300)
+query:  (300,)
+word: health .. etm neighbors: ['health', 'medicine', 'doctor', 'food', 'medical', 'disease', 'students', 'doctors', 'treatment', 'hospital', 'birth', 'water', 'insurance', 'cancer', 'construction', 'percent', 'studies', 'discuss', 'parents', 'levels']
+vectors:  (3102, 300)
+query:  (300,)
+word: people .. etm neighbors: ['people', 'fact', 'simply', 'means', 'point', 'mind', 'person', 'personal', 'important', 'understand', 'common', 'find', 'made', 'involved', 'make', 'sense', 'time', 'reason', 'things', 'present']
+vectors:  (3102, 300)
+query:  (300,)
+word: family .. etm neighbors: ['family', 'means', 'general', 'easy', 'view', 'danger', 'court', 'law', 'lie', 'people', 'apparently', 'common', 'standard', 'heart', 'party', 'personal', 'making', 'responsible', 'modern', 'mind']
+
+
